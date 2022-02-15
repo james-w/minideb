@@ -250,6 +250,13 @@ echo "host" > "$rootfsDir/etc/hostname"
 # We don't care about the particular date, or which package it comes from,
 # we just need a date that isn't very far in the past.
 
+which zcat
+dpkg -S /bin/zcat
+which gzip
+dpkg -S /bin/gzip
+dpkg -l gzip
+dpkg --verify gzip
+
 find "$rootfsDir/usr/share/doc" -name changelog.Debian.gz
 find "$rootfsDir/usr/share/doc" -name changelog.Debian.gz -print0 | xargs -0 -n1 zcat | head
 find "$rootfsDir/usr/share/doc" -name changelog.Debian.gz -print0 | xargs -0 -n1 -I{} dpkg-parsechangelog -SDate -l'{}'
