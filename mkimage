@@ -251,7 +251,7 @@ echo "host" > "$rootfsDir/etc/hostname"
 # we just need a date that isn't very far in the past.
 
 find "$rootfsDir/usr/share/doc" -name changelog.Debian.gz
-find "$rootfsDir/usr/share/doc" -name changelog.Debian.gz | xargs -n1 zcat
+find "$rootfsDir/usr/share/doc" -name changelog.Debian.gz -print0 | xargs -0 -n1 zcat
 find "$rootfsDir/usr/share/doc" -name changelog.Debian.gz -print0 | xargs -0 -n1 -I{} dpkg-parsechangelog -SDate -l'{}'
 
 BUILD_DATE="$(find "$rootfsDir/usr/share/doc" -name changelog.Debian.gz -print0 | xargs -0 -n1 -I{} dpkg-parsechangelog -SDate -l'{}' | xargs -l -i date --date="{}" +%s | sort -n | tail -n 1)"
