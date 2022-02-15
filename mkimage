@@ -250,9 +250,9 @@ echo "host" > "$rootfsDir/etc/hostname"
 # We don't care about the particular date, or which package it comes from,
 # we just need a date that isn't very far in the past.
 
-which zcat
+command -v zcat
 dpkg -S /bin/zcat
-which gzip
+command -v gzip
 dpkg -S /bin/gzip
 dpkg -l gzip
 dpkg --verify gzip
